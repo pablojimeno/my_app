@@ -13,7 +13,7 @@ describe "Users" do
           fill_in "Password",     :with => ""
           fill_in "Confirmation", :with => ""
           click_button
-          response.should render_template('user/new')
+          response.should render_template('users/new')
           response.should have_selector('div#error_explanation')
         end.should_not change(User, :count)
       end
@@ -32,7 +32,7 @@ describe "Users" do
                                         :content => "Welcome")
           response.should render_template('users/show')
           
-        end.should change(User, :count).by(1))  
+        end.should change(User, :count).by(1)
       end
     end
     
