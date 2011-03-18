@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :name, :email, :password, :password_confirmation
 
+  has_many :microposts, :dependent => :destroy
+
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates :name,  :presence        => true,
@@ -43,13 +45,13 @@ class User < ActiveRecord::Base
     user = find_by_id(id)
     (user && user.salt == cookie_salt) ? user : nil
   end
-  
+
   private
-    
+
     def encrypt_password
-      self.salt = make_salt if new_record?      
+      self.salt = make_salt if new_record?
       self.encrypted_password = encrypt(password)
-    end      
+    end
 
     def encrypt(string)
       secure_hash("#{salt}--#{string}")
