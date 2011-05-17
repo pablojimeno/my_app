@@ -368,7 +368,7 @@ describe UsersController do
 
   describe 'follow pages' do
 
-    describe 'when not signed input' do
+    describe 'when not signed in' do
 
       it "should protect 'following'" do
         get :following, :id => 1
